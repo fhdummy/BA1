@@ -1,0 +1,40 @@
+\chapter{Umsetzung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Die Darstellung der Untersuchungs-, Anwendungs- oder Umsetzungs-Methoden und die Beschreibung der Umsetzung sollen die Wege aufzeigen, wie man zu bestimmten Ergebnissen gelangt ist. Es ist nachzuweisen, dass die dargestellten Implementierungen, Analysen und abgeleiteten Schlussfolgerungen nicht nur Frucht eigener kreativer Überlegungen sind, sondern dass sie auf einer soliden Informationsbasis und einem nachvollziehbaren Analyseverfahren beruhen.
+
+\section{Beispiel für Tabellen}
+%
+Es empfiehlt sich, für Tabellen die Standard-\LaTeX{}-Umgebung \emph{tabular} zu verwenden. Bei Bedarf können natürlich auch Erweiterungen (z.B.~\emph{tabularx} oder \emph{array}) zur Anwendung kommen. Eine mögliche Darstellung zeigt Tabelle \ref{Table_Sinc}.
+
+\begin{table}[h!]%
+	\begin{center}
+		\begin{tabular}{|r|r|r|}
+			\firsthline
+			$x$&$\mathrm{sinc}(x)$&$\mathrm{sin}(x)$\\\hline\hline
+			$-0.5$&0.6366&-0.4794\\\hline
+			$0$&1.0000&0\\\hline
+			$0.5$&0.6366&0.4794\\\hline
+		\end{tabular}
+		\caption{Zwei Werte der Sinc-Funktion}
+		\label{Table_Sinc}
+	\end{center}
+\end{table}
+
+\section{Darstellung von Quellcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Es bieten sich mehrere Möglichkeiten Quellcode im Text darzustellen. Verwendet man sehr kurze Quellcodeabschnitte oder Funktionen von Programmiersprachen innerhalb eines Textes, dann kann dies einfach mit der \LaTeX{} Funktion \texttt{$\backslash$texttt\{Quellcode\}} gelöst werden. Längere Quellcodeabschnitte werden durch nummerierte Listings eingebunden. Im Folgenden seien zwei Beispiele dargestellt. Listing \ref{EinfachLst} verwendet die \texttt{lstlisting}-Umgebung direkt und Listing \ref{list:hello.m} verweist auf ein Quellcode-File im Unterverzeichnis Listings.\\
+
+\lstset{escapeinside={\%*}{*)},numbers=none}
+\begin{lstlisting}[language=Matlab,caption=Einfaches Listing ohne Nummerierung,label=EinfachLst]
+	% Bild einlesen
+	I = imread('myct.png');
+	% In Grauwertbild umwandeln
+	G = rgb2gray(I);
+	% Adaptiver Wienerfilter mit Nachbarschaft 3x3
+	F = wiener2(G);
+\end{lstlisting}
+
+\lstset{escapeinside={\%*}{*)},numbers=left}
+\lstinputlisting[language=Matlab, caption=Einfaches Matlabprogramm, label=list:hello.m]{Listings/hello.m}

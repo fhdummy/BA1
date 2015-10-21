@@ -1,0 +1,366 @@
+\documentclass
+[
+a4paper,
+german,
+%twoside,
+openright,                    % Kap.beginn immer rechts! (fkt. nur bei report, nicht bei article)
+12pt                          % ersatzweise 12pt, wenn mehr Seiten entstehen sollen
+]
+{report}
+
+
+
+\usepackage[latin1]{inputenc} % Zeichensatz, ermöglicht die direkte Eingabe von Umlauten im Editor
+\usepackage[pdftex]{graphicx} % Einbindung von Grafiken (pdf, png, jpg)
+\usepackage{float}            % bietet Option [H] für bombenfestes Verankern
+\usepackage[ngerman]{babel}   % Silbentrennung nach der neuen deutschen Rechtschreibung, z.B.: Sys-tem
+\usepackage{amstext}          % für Klartext via \text{} in Formeln
+\usepackage{amsfonts}         % für komplexere Formeln (Mengensymbole ...)
+\usepackage{amssymb}          % für komplexere Formeln (Mengensymbole ...)
+\usepackage{amsmath}  				% für erw. Formeloptionen, Option [] zur Vermeidung von Type3-Fonts
+\usepackage{bm}               % bold math, für \bm{}
+\usepackage{enumerate}        % verbessert Aufzählungen
+\usepackage[bottom]{footmisc} % Fussnoten am Seitenende
+\usepackage{array}            % für Tabellen: bindet tabular-Umgebung ein
+\usepackage{algorithm}        % für Algorithmen
+\usepackage{algorithmic}      % für Algorithmen
+\usepackage{ntheorem}
+\usepackage{theorem}
+\usepackage{pdfpages}         % für die Einbindung kompletter pdf-*Seiten*
+\usepackage{parskip}          % zw. Absätzen: eine knappe Leerzeile statt hängender Einzüge
+\usepackage[right]{eurosym}   % Eurosymbol
+\usepackage{xcolor}           % farbiger Text
+\usepackage[hyphens]{url}     % für \url{http://www}, Option hyp erlaubt auch Umbruch nach "-"
+\usepackage{makeidx}          % Package zur Indexerstellung
+\usepackage{multicol}         % zur Indexerstellung in zwei Spalten
+\usepackage[numbers, square]{natbib}   % Für \setlength{\bibsep}{3mm}; square macht eckige Klammern
+
+%%%%%%%%%%%%%%%%%%%% Zusatz neu S.Schoendorfer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[printonlyused]{acronym}
+\usepackage[toc,page]{appendix}
+\usepackage{placeins}					% FloatBarrier
+\usepackage{nameref}
+\usepackage{courier}
+% Schriftart Einstellen %
+\usepackage{times}
+\fontfamily{ptm}
+\selectfont
+% Zeilenabstand 1.5 fach %
+\usepackage{nomencl}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[plainpages=false, hypertexnames=false, pdftex]{hyperref}
+                               % hyperref statt \url geht, verträgt sich allerdings nicht mit den 
+                               % eingefügten / veränderten Seitenzahlen ... (die stimmen dann nicht mehr)
+\hypersetup{
+  colorlinks=false,
+  allbordercolors={red}
+}
+															
+% Autoref Bezeichnungen %
+%\renewcommand{\chapterautorefname}{Kapitel}
+\let\orgautoref\autoref
+\providecommand{\Autoref}{%
+\def\equationautorefname{Gleichung}%
+\def\figureautorefname{Abbildung}%
+\def\subfigureautorefname{Abbildung}%
+\def\chapterautorefname{Kapitel}%
+\def\sectionautorefname{Abschnitt}%
+\def\subsectionautorefname{Abschnitt}%
+\def\subsubsectionautorefname{Abschnitt}%
+\orgautoref
+}
+\renewcommand{\autoref}{%
+\def\equationautorefname{Gl.}%
+\def\figureautorefname{Abb.}%
+\def\subfigureautorefname{Abb.}%
+\def\chapterautorefname{Kap.}%
+\def\sectionautorefname{Abschn.}%
+\def\subsectionautorefname{Abschn.}%
+\def\subsubsectionautorefname{Abschn.}%
+\orgautoref
+}
+
+% Größe der Fußnoten ändern
+%\renewcommand{\footnotesize}{10pt} % Standardmäßig, wenn Schriftgröße 12 pt -> Fußnote 10pt
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Vorlage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                                
+\usepackage{longtable}
+\usepackage{verbatim}
+\usepackage{verbatimfiles}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{color}
+		%\textcolor{farbe}{text}
+		%\color{farbe}{text} Vorsicht, färbt den Text ab dieser Stelle komplett in dieser Farbe
+		%\pagecolor{farbe}
+		%\colorbox{farbe}{text}
+		%\fcolorbox{r-farbe}{hintergrund-farbe}{text}
+		%\definecolor{name}{model}{werte}  z.Bsp. \definecolor{test}{rbg}{0.5,0.5,0.5}, 
+			%model: 
+				% rbg 0 - 1
+				% RBG 0 - 255
+				% HTML hexcode 0 - f
+				% CMYK
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{darkred}{rgb}{0.7,0.0,0.0}
+
+\usepackage{listings}
+\lstset{language=Matlab,
+   keywords={break,case,catch,continue,else,elseif,end,for,function,
+      global,if,otherwise,persistent,return,switch,try,while},
+   basicstyle=\ttfamily,
+   keywordstyle=\color{blue},
+   commentstyle=\color{dkgreen},
+   stringstyle=\color{red},
+   numbers=left,
+   numberstyle=\tiny\color{gray},
+   stepnumber=1,
+   numbersep=10pt,
+   backgroundcolor=\color{white},
+   tabsize=4,
+   showspaces=false,
+   showstringspaces=false,
+   captionpos=b,
+   breaklines=true
+   }
+	
+% Standardeinstellungen Quellcode Courier New, 10pt
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true} 
+
+% EulerVM in Kombination mit Paladino
+\usepackage{eulervm}
+
+% Changing Font to Paladino
+\renewcommand{\rmdefault}{pplx}
+
+% Standardschrift und Größe für Captions 10pt und Courier
+%\captionsetup{font={\footnotesize,\texttt}}
+%%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%% TODO %%%%
+
+\sloppy                       % großzügiger Zeilenumbruch 
+                              % -> keine rechts rausragenden Zeilen mehr
+
+
+\renewcommand{\listofalgorithms}   % Text "Algoverzeichnis", statt "List of Algos"
+{
+\begingroup
+\listof{algorithm}{Algorithmenverzeichnis}
+\endgroup
+}
+
+
+\floatname{algorithm}{Algorithmus} % Text im Algo: Algorithmus statt algorithm
+\floatname{appendices}{Anhang}% Text im Appendix: Anhang statt appendice
+
+%% Umbenennen von appendices in Anhang, da babel nicht alle makros unterstützt
+\addto\captionsngerman{\let\appendixtocname\appendixname%
+	\let\appendixpagename\appendixname}
+	
+\makeatletter
+\AtBeginDocument{
+	\hypersetup{
+		pdftitle = {BAC1}
+		pdfauthor = {S.Schoendorfer}
+	}
+}
+	
+	
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
+\renewcommand{\lstlistingname}{Quellcode}
+
+%%%%%%%%%%%%%%%%%%%%%% Abstände lt. Vorgabe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\Large\bfseries}{\thechapter}{16pt}{\Large} 
+\titleformat*{\section}{\fontsize{14}{16}\bfseries\sffamily}
+\titleformat*{\subsection}{\fontsize{12}{14}\bfseries\sffamily}
+\titleformat*{\subsubsection}{\fontsize{12}{14}\bfseries\sffamily}
+
+% Abstand zum Text
+% \titlespacing{Klasse}{Links}{Oben}{Unten}{Rechts}
+\titlespacing{\chapter}{0pt}{-2em}{6pt}
+\titlespacing{\section}{0pt}{4pt}{2pt}
+\titlespacing{\subsection}{0pt}{4pt}{2pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Header & Footer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+
+% Für Header den Richtigen Author eingeben
+\newcommand{\TheAuthor}{}
+\newcommand{\ErnR}{Nachname1, Vorname1}
+\newcommand{\SchS}{Nachname2, Vorname2}
+\newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}}
+
+% Header in Kapitel
+\fancypagestyle{Author}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[L]{\leftmark\hspace{0.15cm}/ \TheAuthor}
+	\fancyhead[R]{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\headheight=1cm
+}
+
+% Header bei neuem Kapitel
+\fancypagestyle{plain}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[L]{\TheAuthor}
+	\fancyhead[R]{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\headheight=1cm
+}
+
+% Header am Anfang und Ende
+\fancypagestyle{simple}{ %Redefine plain for Start end End of document
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[R]{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\headheight=1cm
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Index-Erstellung
+%
+% Anmerkung: für die Indexerstellung muss auch die TeXnicCenter-IDE angepasst 
+% werden:
+% 1.) Projekt / Eigenschaften / verwendet MakeIndex [x] 
+% 2.) Ausgabe / Ausgabeprofil definieren
+%
+\makeindex % erstelle einen Index bzw. ein Sachverzeichnis)
+%
+% Wenn kein Index gewünscht ist: einfach \makeindex auskommentieren
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Literaturverzeichnis mit BibTeX
+%
+%\bibliographystyle{ka-style} % Uni-KA-Style
+\bibliographystyle{IEEEtran} 
+\setlength{\bibsep}{3mm}                  % Abstände im Litverzeichnis
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Beispiel für die Anpassung des Satzspiegels und 
+% die Verwendung von Schnittmarken (momentan ausgeschaltet)
+% Im Beispiel: Anpassung des Drucks auf Taschenbuchformat 
+%
+% Obacht: für Tests hiermit (Probeausdrucke...): 
+% stets im Adobe Acrobat im Druckdialog die Seitenanpassung *abschalten*!
+% sonst stimmen die Maße nicht!
+% 
+%
+\usepackage[paper=a4paper,tmargin=2.5cm,bmargin=2.5cm,lmargin=3.0cm,rmargin=2.5cm,verbose]{geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Abkürzungsliste, Liste explizit vorgegebener Abk.
+%
+% Anmerkung: für Wörter mit Umlauten
+% muss das Paket \usepackage[T1]{fontenc} eingebunden werden --
+% in der vorliegenden Version funktionieren *keine* Umlaute!!
+% 
+\hyphenation{Samm-lung-en Samm-lung Stau-beck-en Vor-na-me-in-i-ti-al % Ver-st\"ar-ker-aus-gang 
+Nach-na-me Kurz-be-zeich-nung deutsch-spra-chige deutsch-sprachig Screen-shot Screen-shots schluss-end-lich Schluss-end-lich Make-In-dex Da-tei-name Da-tei-namen Ur-instinkt Ur-instinkte} 
+%
+
+%%%%%%%%%%%%%%%%%%%% Umlaute in Quellcode %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1,} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\pagestyle{empty}
+\include{Titelblatt} % Hier wird Titelblatt und eidesstattliche Erklärung eingefügt
+
+%\include{Danksagung} % Kann auch auskommentiert werden
+\include{Abstract}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+%\setcounter{page}{5}
+\tableofcontents
+
+
+%\include{Abkuerzungen}
+
+\listoffigures
+\protect \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+\listoftables
+\protect \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+
+\lstlistoflistings
+\protect \addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+
+%\listofalgorithms
+%\protect \addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
+\clearpage
+\pagenumbering{arabic}
+\include{Einfuehrung}
+\include{Grundlagen}
+\include{Umsetzung}
+\include{Schlussbetrachtungen}
+
+
+% Erstes Literaturverzeichnis, mit BibTeX
+
+\interlinepenalty=10000 % Literatureinträge: Absätze zusammenhalten
+%\clearpage
+\addcontentsline{toc}{chapter}{Literatur}   
+\bibliography{bibliografie}
+\interlinepenalty=100
+
+
+% Anhang je nach Wunsch
+\begin{appendices}
+%\addcontentsline{toc}{chapter}{Anhang}
+%\include{Anhang_Mathematik}                 % A
+%\include{Anhang_FormatDerParameterdateien}  % B
+%\include{Anhang_Quelltexte}                 % C
+%\include{Anhang_Datenblaetter}              % D
+%\include{Anhang_Glossar}                    % E
+%\include{Verfasser-Einzelabschnitte}
+\end{appendices}
+
+
+% Schmutzblatt (leere Seite am Ende)
+
+\newpage                                    
+\pagestyle{empty}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{BilderAllgemein/leer.jpg}
+\end{figure}
+
+
+
+\end{document}
